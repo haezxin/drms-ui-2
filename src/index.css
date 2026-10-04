@@ -1,0 +1,135 @@
+/* @import url() FONT IMPORTS MUST ALWAYS BE AT THE VERY TOP OF THIS FILE, ABOVE THE TAILWIND IMPORTS — DO NOT DELETE THIS COMMENT */
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+/* Dark — graphite / smoke / charcoal (default) */
+:root {
+  --surface-0: 11 13 13;
+  --surface-1: 16 19 19;
+  --surface-2: 21 24 24;
+  --surface-3: 26 29 29;
+  --surface-4: 32 35 35;
+  --surface-5: 40 43 43;
+  --atmo-hi: 30 33 33;
+  --ink-primary: 237 234 227;
+  --ink-secondary: 161 157 149;
+  --ink-tertiary: 124 121 114;
+  --accent-critical: 214 88 66;
+  --accent-warning: 214 142 66;
+  --accent-normal: 110 163 124;
+  --accent-info: 122 152 172;
+  --grid-alpha: 0.035;
+  color-scheme: dark;
+}
+/* Light — ivory / stone / warm gray */
+[data-theme='light'] {
+  --surface-0: 240 239 234;
+  --surface-1: 233 231 225;
+  --surface-2: 244 242 237;
+  --surface-3: 221 218 210;
+  --surface-4: 210 207 198;
+  --surface-5: 198 194 184;
+  --atmo-hi: 248 247 243;
+  --ink-primary: 29 31 30;
+  --ink-secondary: 94 91 85;
+  --ink-tertiary: 113 109 102;
+  --accent-critical: 176 60 40;
+  --accent-warning: 166 98 28;
+  --accent-normal: 58 116 78;
+  --accent-info: 66 98 118;
+  --grid-alpha: 0.05;
+  color-scheme: light;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  overflow-x: hidden;
+}
+body {
+  background-color: rgb(var(--surface-0));
+  color: rgb(var(--ink-primary));
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 200ms ease-out, color 200ms ease-out;
+}
+
+button,
+[role='button'],
+nav,
+aside,
+header,
+section,
+article,
+.panel-surface,
+.surface-panel {
+  background-color: rgb(var(--surface-1));
+  border-color: rgb(var(--ink-primary) / 0.1);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.02);
+}
+
+button,
+[role='button'],
+input,
+select,
+textarea {
+  background-color: rgb(var(--surface-1));
+  border: 1px solid rgb(var(--ink-primary) / 0.1);
+}
+
+button:hover,
+[role='button']:hover {
+  background-color: rgb(var(--surface-2));
+}
+
+/* Environmental surface: near-imperceptible monochrome tonal depth + fading technical grid */
+.atmosphere {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(140% 90% at 12% -20%, rgb(var(--atmo-hi)) 0%, transparent 55%),
+    radial-gradient(100% 80% at 110% 120%, rgb(var(--surface-2)) 0%, transparent 55%),
+    linear-gradient(180deg, rgb(var(--surface-1)) 0%, rgb(var(--surface-0)) 60%);
+}
+.atmosphere::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgb(var(--ink-primary) / var(--grid-alpha)) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--ink-primary) / var(--grid-alpha)) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 30% 10%, #000 25%, transparent 85%);
+  mask-image: radial-gradient(ellipse 90% 70% at 30% 10%, #000 25%, transparent 85%);
+}
+.map-surface {
+  background: radial-gradient(80% 70% at 45% 40%, rgb(var(--atmo-hi)) 0%, rgb(var(--surface-1)) 75%);
+}
+/* Display headings: subtle tonal fill from primary ink into secondary */
+.text-tonal {
+  background-image: linear-gradient(100deg, rgb(var(--ink-primary)) 35%, rgb(var(--ink-secondary)) 115%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+::selection {
+  background: rgb(var(--ink-primary));
+  color: rgb(var(--surface-0));
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--ink-tertiary) / 0.4) transparent;
+}
